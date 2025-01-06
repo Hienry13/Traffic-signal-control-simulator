@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Professional Traffic Signal Control Simulator with LOS analysis, Webster's optimal cycle, signal timing diagrams, and AI-assisted prediction.">
+    <title>Traffic Signal Control Simulator — Professional Edition</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
+</head>
+<body>
+    <div class="bg-animation"><div class="bg-orb bg-orb-1"></div><div class="bg-orb bg-orb-2"></div><div class="bg-orb bg-orb-3"></div></div>
+
+    <header>
+        <div class="header-content">
+            <div class="logo-section">
+                <div class="logo-icon"><svg viewBox="0 0 40 40" fill="none"><rect x="14" y="2" width="12" height="36" rx="4" fill="url(#lg)"/><circle cx="20" cy="10" r="3.5" fill="#ef4444"/><circle cx="20" cy="20" r="3.5" fill="#eab308"/><circle cx="20" cy="30" r="3.5" fill="#22c55e"/><defs><linearGradient id="lg" x1="14" y1="2" x2="26" y2="38"><stop stop-color="#334155"/><stop offset="1" stop-color="#1e293b"/></linearGradient></defs></svg></div>
+                <div><h1>Traffic Signal Control Simulator</h1><p class="subtitle">Professional Edition — Signal Engineering Tool</p></div>
+            </div>
+            <div class="header-actions">
+                <button class="theme-toggle" id="theme-toggle" title="Toggle Theme"><span class="theme-icon-dark">🌙</span><span class="theme-icon-light">☀️</span></button>
+                <div class="header-badge"><span class="badge-dot"></span><span>Interactive Demo</span></div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Intro -->
+        <section class="intro-section">
+            <div class="intro-card glass-card">
+                <div class="intro-icon">🚦</div>
+                <h2>Professional Signal Engineering Toolkit</h2>
+                <p>Design, analyze, and optimize traffic signal timing with <strong>industry-standard methodologies</strong> — HCM Level of Service, Webster's optimal cycle, and AI-assisted prediction.</p>
+                <div class="feature-pills">
+                    <span class="pill">📐 Webster's Formula</span>
+                    <span class="pill">🏷️ LOS A-F</span>
+                    <span class="pill pill-ml">🧠 AI Prediction</span>
+                    <span class="pill">📋 Signal Timing Plan</span>
+                    <span class="pill">📊 Data Analysis</span>
+                    <span class="pill">📄 PDF Report</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Control Strategies -->
+        <section class="algo-section">
+            <h2 class="section-title"><span class="section-icon">🧠</span> Control Strategies</h2>
+            <div class="algo-grid">
+                <div class="glass-card algo-card"><div class="algo-badge traditional">Traditional</div><h3>🔒 Fixed-Time</h3><p>Equal green time for all phases. Simple baseline for comparison.</p></div>
+                <div class="glass-card algo-card"><div class="algo-badge heuristic">Heuristic</div><h3>📐 Adaptive</h3><p>Proportional allocation based on current queue demand.</p></div>
+                <div class="glass-card algo-card algo-card-highlight"><div class="algo-badge ml">AI / ML</div><h3>🧠 AI-Assisted</h3><p>ML prediction + look-ahead planning for proactive optimization.</p></div>
+            </div>
+        </section>
+
+        <!-- AI Traffic Prediction -->
+        <section class="prediction-section" id="prediction-section">
+            <h2 class="section-title"><span class="section-icon">🔮</span> AI Traffic Prediction</h2>
+            <div class="prediction-grid">
+                <div class="glass-card prediction-input-card">
+                    <h3>Prediction Parameters</h3>
+                    <div class="param-group"><label>Time of Day</label><div class="time-slider-row"><input type="range" id="pred-hour" min="0" max="23" value="8" step="1" class="time-slider"><div class="time-badge"><span class="time-emoji" id="time-emoji">🌅</span><span class="time-text" id="time-text">08:00</span></div></div><div class="hourly-mini-chart" id="hourly-mini-chart"></div></div>
+                    <div class="param-group"><label>Day Type</label><div class="toggle-group" id="day-type-group"><button class="toggle-btn active" data-value="weekday">📅 Weekday</button><button class="toggle-btn" data-value="weekend">🏖️ Weekend</button></div></div>
+                    <div class="param-group"><label>Traffic Scenario</label><div class="toggle-group" id="scenario-group"><button class="toggle-btn active" data-value="normal">🚗 Normal</button><button class="toggle-btn" data-value="rush">🏙️ Rush Hour</button><button class="toggle-btn" data-value="night">🌙 Night</button></div></div>
+                    <button class="predict-btn" id="predict-btn"><span>🔮</span><span>Generate Prediction</span><div class="btn-shimmer"></div></button>
+                </div>
+                <div class="glass-card prediction-results-card hidden" id="prediction-results-card">
+                    <h3>Predicted Traffic Flow</h3>
+                    <div class="confidence-row"><span class="confidence-label">Model Confidence:</span><div class="confidence-bar"><div class="confidence-fill" id="confidence-fill"></div></div><span class="confidence-value" id="confidence-value">—</span></div>
+                    <div class="pred-directions" id="pred-directions"></div>
+                    <div class="pred-chart-wrapper"><canvas id="chart-prediction"></canvas></div>
+                    <div class="pred-timing" id="pred-timing"></div>
+                    <button class="use-prediction-btn" id="use-prediction-btn">📥 Use Predicted Values in Simulation</button>
+                </div>
+            </div>
+            <div class="glass-card ai-insights-card hidden" id="ai-insights-card">
+                <div class="insights-header"><h3>🤖 AI Recommendations</h3><span class="insights-badge" id="insights-count">0</span></div>
+                <div class="insights-list" id="insights-list"></div>
+            </div>
+        </section>
+
+        <!-- 24-Hour Traffic Data Analysis (NEW) -->
+        <section class="data-analysis-section hidden" id="data-analysis-section">
+            <h2 class="section-title"><span class="section-icon">📊</span> Traffic Data Analysis</h2>
+            <div class="analysis-grid">
+                <div class="glass-card"><h3>24-Hour Volume Profile</h3><div class="chart-wrapper-sm"><canvas id="chart-24h"></canvas></div></div>
+                <div class="glass-card">
+                    <h3>Peak Hour Analysis</h3>
+                    <div class="peak-stats" id="peak-stats"></div>
+                    <div class="phf-display" id="phf-display"></div>
+                    <div class="directional-split" id="directional-split"></div>
+                </div>
+            </div>
+            <div class="glass-card"><h3>Hourly Volume Table</h3><div class="table-wrapper"><table id="hourly-table"><thead><tr><th>Hour</th><th>North</th><th>South</th><th>East</th><th>West</th><th>Total</th><th>Status</th></tr></thead><tbody id="hourly-tbody"></tbody></table></div></div>
+        </section>
+
+        <!-- Controller Configuration (NEW) -->
+        <section class="controller-section" id="controller-section">
+            <h2 class="section-title"><span class="section-icon">⚙️</span> Controller Configuration</h2>
+            <div class="controller-grid">
+                <div class="glass-card">
+                    <h3>🚦 Signal Parameters</h3>
+                    <div class="ctrl-grid">
+                        <div class="ctrl-group"><label>Min Green (s)</label><input type="number" id="ctrl-min-green" min="4" max="20" value="7"><span class="ctrl-hint">NEMA min</span></div>
+                        <div class="ctrl-group"><label>Max Green (s)</label><input type="number" id="ctrl-max-green" min="15" max="90" value="60"><span class="ctrl-hint">NEMA max</span></div>
+                        <div class="ctrl-group"><label>Yellow Interval (s)</label><input type="number" id="ctrl-yellow" min="3" max="6" value="3" step="0.5"><span class="ctrl-hint">ITE std</span></div>
+                        <div class="ctrl-group"><label>All-Red Interval (s)</label><input type="number" id="ctrl-allred" min="0" max="5" value="2" step="0.5"><span class="ctrl-hint">Clearance</span></div>
+                        <div class="ctrl-group"><label>Ped Walk (s)</label><input type="number" id="ctrl-ped-walk" min="4" max="15" value="7"><span class="ctrl-hint">MUTCD</span></div>
+                        <div class="ctrl-group"><label>Ped Clearance (s)</label><input type="number" id="ctrl-ped-clear" min="5" max="30" value="12"><span class="ctrl-hint">FDW</span></div>
+                    </div>
+                </div>
+                <div class="glass-card">
+                    <h3>🛣️ Intersection Geometry</h3>
+                    <div class="ctrl-grid">
+                        <div class="ctrl-group"><label>Lanes per Approach</label><input type="number" id="ctrl-lanes" min="1" max="4" value="2"><span class="ctrl-hint">Through lanes</span></div>
+                        <div class="ctrl-group"><label>Saturation Flow (veh/hr/ln)</label><input type="number" id="ctrl-sat-flow" min="1400" max="2200" value="1800" step="50"><span class="ctrl-hint">HCM default</span></div>
+                        <div class="ctrl-group"><label>Lost Time/Phase (s)</label><input type="number" id="ctrl-lost-time" min="2" max="6" value="4"><span class="ctrl-hint">Start-up + clearance</span></div>
+                        <div class="ctrl-group"><label>Number of Phases</label><input type="number" id="ctrl-phases" min="2" max="4" value="2"><span class="ctrl-hint">Ring structure</span></div>
+                    </div>
+                    <div class="nema-diagram">
+                        <div class="nema-label">NEMA Phase Diagram</div>
+                        <div class="nema-ring" id="nema-ring">
+                            <div class="nema-phase nema-active"><span class="nema-num">Φ2</span><span class="nema-dir">NS Through</span></div>
+                            <div class="nema-barrier"></div>
+                            <div class="nema-phase nema-active"><span class="nema-num">Φ4</span><span class="nema-dir">EW Through</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Simulation Configuration -->
+        <section class="config-section" id="config-section">
+            <h2 class="section-title"><span class="section-icon">🎛️</span> Simulation Setup</h2>
+            <div class="config-grid">
+                <div class="glass-card config-card">
+                    <h3>Traffic Flow <span class="unit-label">(vehicles/cycle)</span></h3>
+                    <div class="presets-bar"><span class="presets-label">Presets:</span><button class="preset-btn active" data-preset="custom" id="preset-custom">🔧 Custom</button><button class="preset-btn" data-preset="rush-hour">🏙️ Rush Hour</button><button class="preset-btn" data-preset="night">🌙 Night</button><button class="preset-btn" data-preset="school">🏫 School Zone</button><button class="preset-btn" data-preset="event">🎪 Event</button></div>
+                    <div class="input-grid">
+                        <div class="input-group" id="input-north"><label for="flow-north"><span class="direction-indicator north">▲</span> North</label><input type="number" id="flow-north" min="1" max="100" value="20"><div class="input-range-bar"><div class="input-range-fill" style="width:20%"></div></div></div>
+                        <div class="input-group" id="input-south"><label for="flow-south"><span class="direction-indicator south">▼</span> South</label><input type="number" id="flow-south" min="1" max="100" value="10"><div class="input-range-bar"><div class="input-range-fill" style="width:10%"></div></div></div>
+                        <div class="input-group" id="input-east"><label for="flow-east"><span class="direction-indicator east">▶</span> East</label><input type="number" id="flow-east" min="1" max="100" value="8"><div class="input-range-bar"><div class="input-range-fill" style="width:8%"></div></div></div>
+                        <div class="input-group" id="input-west"><label for="flow-west"><span class="direction-indicator west">◀</span> West</label><input type="number" id="flow-west" min="1" max="100" value="12"><div class="input-range-bar"><div class="input-range-fill" style="width:12%"></div></div></div>
+                    </div>
+                </div>
+                <div class="glass-card config-card">
+                    <h3>Simulation Settings</h3>
+                    <div class="settings-group">
+                        <div class="input-group"><label>Number of Cycles</label><input type="number" id="num-cycles" min="1" max="50" value="10"></div>
+                        <div class="input-group"><label>Cycle Duration (s)</label><input type="number" id="cycle-duration" min="30" max="180" value="60"></div>
+                        <div class="input-group"><label>Animation Speed</label><div class="speed-slider-wrapper"><span class="speed-label">🐢</span><input type="range" id="sim-speed" min="1" max="5" value="3"><span class="speed-label">🐇</span><span class="speed-value" id="speed-value">3x</span></div></div>
+                        <div class="input-group"><label>Control Mode</label>
+                            <div class="mode-selector">
+                                <button class="mode-btn active" data-mode="all"><span class="mode-icon">⚖️</span><span>Compare All</span></button>
+                                <button class="mode-btn" data-mode="fixed"><span class="mode-icon">🔒</span><span>Fixed</span></button>
+                                <button class="mode-btn" data-mode="adaptive"><span class="mode-icon">📐</span><span>Adaptive</span></button>
+                                <button class="mode-btn" data-mode="ai"><span class="mode-icon">🧠</span><span>AI-Assisted</span></button>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="run-btn" id="run-simulation-btn"><span class="btn-icon">▶</span><span>Run Simulation</span><div class="btn-shimmer"></div></button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Traffic Light Visualization -->
+        <section class="visualization-section hidden" id="visualization-section">
+            <h2 class="section-title"><span class="section-icon">🚦</span> Signal Status</h2>
+            <div class="intersection-container glass-card">
+                <div class="intersection-grid">
+                    <div class="traffic-light-wrapper north-light"><div class="direction-label">North</div><div class="traffic-light"><div class="light red" id="light-north-red"></div><div class="light yellow" id="light-north-yellow"></div><div class="light green" id="light-north-green"></div></div><div class="queue-display" id="queue-north"><span class="queue-count">0</span><span class="queue-label">in queue</span></div></div>
+                    <div class="traffic-light-wrapper west-light"><div class="direction-label">West</div><div class="traffic-light horizontal"><div class="light red" id="light-west-red"></div><div class="light yellow" id="light-west-yellow"></div><div class="light green" id="light-west-green"></div></div><div class="queue-display" id="queue-west"><span class="queue-count">0</span><span class="queue-label">in queue</span></div></div>
+                    <div class="intersection-center"><div class="road road-ns"></div><div class="road road-ew"></div><div class="intersection-box"></div><div class="cycle-indicator"><span>Cycle</span><span class="cycle-num" id="current-cycle-num">0</span></div></div>
+                    <div class="traffic-light-wrapper east-light"><div class="direction-label">East</div><div class="traffic-light horizontal"><div class="light red" id="light-east-red"></div><div class="light yellow" id="light-east-yellow"></div><div class="light green" id="light-east-green"></div></div><div class="queue-display" id="queue-east"><span class="queue-count">0</span><span class="queue-label">in queue</span></div></div>
+                    <div class="traffic-light-wrapper south-light"><div class="direction-label">South</div><div class="traffic-light"><div class="light red" id="light-south-red"></div><div class="light yellow" id="light-south-yellow"></div><div class="light green" id="light-south-green"></div></div><div class="queue-display" id="queue-south"><span class="queue-count">0</span><span class="queue-label">in queue</span></div></div>
+                </div>
+                <div class="sim-progress"><div class="progress-bar"><div class="progress-fill" id="progress-fill"></div></div><span class="progress-text" id="progress-text">Simulating...</span></div>
+            </div>
+        </section>
+
+        <!-- Results -->
+        <section class="results-section hidden" id="results-section">
+            <div class="results-header">
+                <h2 class="section-title"><span class="section-icon">📊</span> Simulation Results</h2>
+                <div class="results-actions">
+                    <button class="export-btn" id="export-csv-btn"><span>📥</span> CSV</button>
+                    <button class="export-btn export-pdf" id="export-pdf-btn"><span>📄</span> PDF Report</button>
+                </div>
+            </div>
+            <div class="glass-card ranking-card hidden" id="ranking-card"><h3>🏆 Strategy Ranking</h3><div class="ranking-list" id="ranking-list"></div></div>
+            <div class="summary-grid" id="summary-grid"></div>
+
+            <!-- LOS Analysis (NEW) -->
+            <div class="glass-card los-section" id="los-section">
+                <h3>🏷️ Level of Service — HCM 2010</h3>
+                <p class="los-subtitle">Based on average control delay per vehicle at signalized intersections</p>
+                <div class="los-grid" id="los-grid"></div>
+                <div class="los-legend"><span class="los-leg-item"><span class="los-dot" style="background:#22c55e"></span>A ≤10s</span><span class="los-leg-item"><span class="los-dot" style="background:#84cc16"></span>B ≤20s</span><span class="los-leg-item"><span class="los-dot" style="background:#eab308"></span>C ≤35s</span><span class="los-leg-item"><span class="los-dot" style="background:#f97316"></span>D ≤55s</span><span class="los-leg-item"><span class="los-dot" style="background:#ef4444"></span>E ≤80s</span><span class="los-leg-item"><span class="los-dot" style="background:#991b1b"></span>F &gt;80s</span></div>
+            </div>
+
+            <!-- Webster's + Signal Timing (NEW) -->
+            <div class="webster-timing-grid">
+                <div class="glass-card webster-card" id="webster-card">
+                    <h3>📐 Webster's Optimal Cycle Length</h3>
+                    <div id="webster-content"></div>
+                </div>
+                <div class="glass-card timing-plan-card" id="timing-plan-card">
+                    <h3>📋 Signal Timing Plan</h3>
+                    <div id="timing-diagram"></div>
+                </div>
+            </div>
+
+            <!-- v/c Ratio (NEW) -->
+            <div class="glass-card vc-section" id="vc-section">
+                <h3>📊 Volume-to-Capacity Analysis</h3>
+                <div class="vc-grid" id="vc-grid"></div>
+            </div>
+
+            <div class="charts-grid">
+                <div class="glass-card chart-card"><h3>Average Waiting Time per Cycle</h3><div class="chart-wrapper"><canvas id="chart-waiting"></canvas></div></div>
+                <div class="glass-card chart-card"><h3>Queue Length per Cycle</h3><div class="chart-wrapper"><canvas id="chart-queue"></canvas></div></div>
+                <div class="glass-card chart-card"><h3>Throughput per Cycle</h3><div class="chart-wrapper"><canvas id="chart-throughput"></canvas></div></div>
+                <div class="glass-card chart-card"><h3>Overall Comparison</h3><div class="chart-wrapper"><canvas id="chart-comparison"></canvas></div></div>
+            </div>
+            <div class="glass-card table-card"><h3>Cycle-by-Cycle Details</h3><div class="table-wrapper"><table><thead><tr><th>Cycle</th><th>Mode</th><th>N Queue</th><th>S Queue</th><th>E Queue</th><th>W Queue</th><th>Served</th><th>Avg Wait (s)</th></tr></thead><tbody id="details-tbody"></tbody></table></div></div>
+            <div class="glass-card history-card"><div class="history-header"><h3>📜 Simulation History</h3><button class="clear-history-btn" id="clear-history-btn">Clear All</button></div><div class="history-list" id="history-list"><p class="history-empty">No simulations recorded yet.</p></div></div>
+        </section>
+    </main>
+    <footer><p>Traffic Signal Control Simulator — Professional Edition | Signal Engineering Toolkit</p></footer>
+    <script src="simulator.js"></script>
+</body>
+</html>
