@@ -8,21 +8,21 @@ This project demonstrates how traffic signal timing affects congestion, vehicle 
 
 ## Features
 
-* **Simulation of a four-direction intersection** (North, South, East, West)
-* **Fixed-time signal control** — equal green time allocation across all phases
-* **Adaptive signal control** — dynamic green time allocation based on traffic volume and queue demand
-* **Vehicle queue simulation** with cycle-by-cycle tracking
-* **Performance metrics**: average waiting time, throughput, queue length
-* **Visual comparison** of control strategies with interactive charts
-* **Live traffic light visualization** with animated signal phases
-* **Responsive design** — works on desktop, tablet, and mobile
+- **Simulation of a four-direction intersection** (North, South, East, West)
+- **Fixed-time signal control** — equal green time allocation across all phases
+- **Adaptive signal control** — dynamic green time allocation based on traffic volume and queue demand
+- **Vehicle queue simulation** with cycle-by-cycle tracking
+- **Performance metrics**: average waiting time, throughput, queue length
+- **Visual comparison** of control strategies with interactive charts
+- **Live traffic light visualization** with animated signal phases
+- **Responsive design** — works on desktop, tablet, and mobile
 
 ## Technologies Used
 
-* **HTML5** — semantic markup & structure
-* **CSS3** — glassmorphism design, animations, responsive layout
-* **JavaScript** — simulation engine, DOM manipulation, event handling
-* **Chart.js v4** — data visualization (line, bar, radar, doughnut charts)
+- **HTML5** — semantic markup & structure
+- **CSS3** — glassmorphism design, animations, responsive layout
+- **JavaScript** — simulation engine, DOM manipulation, event handling
+- **Chart.js v4** — data visualization (line, bar, radar, doughnut charts)
 
 ## How It Works
 
@@ -34,10 +34,10 @@ This project demonstrates how traffic signal timing affects congestion, vehicle 
 
 ### Control Strategies
 
-| Strategy | Description |
-|----------|-------------|
-| **Fixed-Time** | Splits green time equally between NS and EW phases. Each direction gets the same capacity regardless of demand. |
-| **Adaptive** | Dynamically allocates green time proportional to current queue sizes. Uses optimized coordination for higher throughput. Heavier directions receive more service within each phase. |
+| Strategy       | Description                                                                                                                                                                         |
+| -------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Fixed-Time** | Splits green time equally between NS and EW phases. Each direction gets the same capacity regardless of demand.                                                                     |
+| **Adaptive**   | Dynamically allocates green time proportional to current queue sizes. Uses optimized coordination for higher throughput. Heavier directions receive more service within each phase. |
 
 ## Purpose
 
@@ -48,19 +48,3 @@ This project is designed for educational and demonstration purposes, showcasing 
 1. Download or clone the repository
 2. Open `index.html` in any modern web browser
 3. Enter traffic parameters and click **Run Simulation**
-
-No build tools, servers, or dependencies needed — it works entirely in the browser.
-
-## Project Structure
-
-```
-Traffic-signal-control-simulator/
-├── index.html       # Main HTML page
-├── style.css        # Styling & design system
-├── simulator.js     # Simulation engine & UI logic
-└── README.md        # This file
-```
-
-## Author
-
-Developed as a technical project to demonstrate traffic system simulation and optimization concepts.
