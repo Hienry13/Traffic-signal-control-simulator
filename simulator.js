@@ -1,4 +1,3 @@
-/* Traffic Signal Control Simulator — Professional Edition */
 (function () {
   "use strict";
   const DOM = {
